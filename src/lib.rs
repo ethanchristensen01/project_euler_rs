@@ -42,6 +42,7 @@ pub fn find_palindrome_product () -> Option<Int> {
   None
 }
 
+#[allow(dead_code)]
 fn list_checked_numbers () -> Int {
   let mut count = 0;
   for d in D_ARR {
