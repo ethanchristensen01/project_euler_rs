@@ -10,3 +10,5 @@ criterion = { version = "0.4", features = ["html_reports"] }
 name = "bench"
 harness = false
 
+[lints]
+clippy.pedantic = "warn"

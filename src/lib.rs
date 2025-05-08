@@ -2,7 +2,7 @@ pub type Int = u32;
 
 #[allow(clippy::useless_conversion)]
 #[inline]
-pub fn is_palindrome(n: Int) -> bool {
+#[must_use] pub fn is_palindrome(n: Int) -> bool {
   let mut num = n;
   let mut rev = 0;
   while num > 0 {
@@ -19,7 +19,7 @@ const E_ARR: [Int; 10] = B_ARR;
 const CF_ARR: [(Int, Int); 4] = [(9, 1), (7, 7), (3, 3), (1, 9)];
 #[inline]
 /// Assume digits = 3
-pub fn find_palindrome_product () -> Option<Int> {
+#[must_use] pub fn find_palindrome_product () -> Option<Int> {
   for d in D_ARR {
     for b in B_ARR {
       for e in E_ARR {
@@ -75,7 +75,7 @@ mod tests {
 
   #[test]
   fn find_palindrome_product_correct () {
-    assert_eq!(Some(906609), find_palindrome_product())
+    assert_eq!(Some(906_609), find_palindrome_product());
   }
 
   #[test]
@@ -83,11 +83,11 @@ mod tests {
     let inputs: Vec<(Int, bool)> = vec!(
       (123, false),
       (121, true),
-      (123456, false),
-      (123326, false),
-      (123351, false),
-      (123421, false),
-      (123321, true)
+      (123_456, false),
+      (123_326, false),
+      (123_351, false),
+      (123_421, false),
+      (123_321, true)
     );
     inputs.into_iter().for_each(|input| assert_eq!(is_palindrome(input.0), input.1));
   }
