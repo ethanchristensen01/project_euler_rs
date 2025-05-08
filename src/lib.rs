@@ -2,9 +2,10 @@ pub type Int = u32;
 
 #[allow(clippy::useless_conversion)]
 #[inline]
-#[must_use] pub fn is_palindrome(n: Int) -> bool {
-  let mut num = n;
-  let mut rev = 0;
+#[must_use]
+pub const fn is_palindrome(n: Int) -> bool {
+  let mut num: Int = n;
+  let mut rev: Int = 0;
   while num > 0 {
     rev = rev * 10 + num % 10;
     num /= 10;
@@ -80,7 +81,7 @@ mod tests {
 
   #[test]
   fn is_palindrome_correct () {
-    let inputs: Vec<(Int, bool)> = vec!(
+    let inputs: Vec<(Int, bool)> = vec![
       (123, false),
       (121, true),
       (123_456, false),
@@ -88,7 +89,7 @@ mod tests {
       (123_351, false),
       (123_421, false),
       (123_321, true)
-    );
+    ];
     inputs.into_iter().for_each(|input| assert_eq!(is_palindrome(input.0), input.1));
   }
 
