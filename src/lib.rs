@@ -18,9 +18,10 @@ const D_ARR: [Int; 2] = [900, 800];
 const B_ARR: [Int; 10] = [90, 80, 70, 60, 50, 40, 30, 20, 10, 0];
 const E_ARR: [Int; 10] = B_ARR;
 const CF_ARR: [(Int, Int); 4] = [(9, 1), (7, 7), (3, 3), (1, 9)];
-#[inline]
 /// Assume digits = 3
-#[must_use] pub fn find_palindrome_product () -> Option<Int> {
+#[inline]
+#[must_use]
+pub fn find_palindrome_product () -> Option<Int> {
   for d in D_ARR {
     for b in B_ARR {
       for e in E_ARR {
