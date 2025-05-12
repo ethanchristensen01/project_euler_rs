@@ -1,5 +1,5 @@
 [package]
-name = "palindrome"
+name = "project_euler"
 version = "0.1.0"
 edition = "2024"
 
@@ -7,7 +7,11 @@ edition = "2024"
 criterion = { version = "0.4", features = ["html_reports"] }
 
 [[bench]]
-name = "bench"
+name = "problem_006_bench"
+harness = false
+
+[[bench]]
+name = "problem_007_bench"
 harness = false
 
 [lints]

@@ -1,6 +1,6 @@
 use std::hint::black_box;
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use palindrome::{find_palindrome_product, is_palindrome, Int};
+use project_euler::problem_006::{find_palindrome_product, is_palindrome, Int};
 
 fn criterion_benchmark(c: &mut Criterion) {
   let inputs: Vec<Int> = vec![
