@@ -14,6 +14,10 @@ harness = false
 name = "problem_007_bench"
 harness = false
 
+[[bench]]
+name = "problem_008_bench"
+harness = false
+
 [lints]
 clippy.pedantic = "warn"
 clippy.nursery = "warn"

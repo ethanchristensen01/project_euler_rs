@@ -11,7 +11,7 @@ fn criterion_benchmark(c: &mut Criterion) {
   ];
   for input in inputs {
     c.bench_with_input(
-      BenchmarkId::new("nth_prime", input),
+      BenchmarkId::new("007_nth_prime", input),
       &input,
       |b, i| b.iter(|| nth_prime(black_box(*i)))
     );
