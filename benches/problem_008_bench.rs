@@ -7,6 +7,7 @@ fn criterion_benchmark(c: &mut Criterion) {
     4,
     8,
     12,
+    13,
     16
   ];
   c.bench_function("008_numstring_to_numslice", |b| b.iter(|| numstring_to_numslice(black_box(BIG_NUM_STR))));
