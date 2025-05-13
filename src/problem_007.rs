@@ -41,9 +41,10 @@ impl Iterator for PrimeSieve {
   }
 }
 
+/// ZERO INDEXED
 #[must_use]
 pub fn nth_prime(n: usize) -> Int {
-  let mut prime_sieve = PrimeSieve::with_capacity(10001);
+  let mut prime_sieve = PrimeSieve::with_capacity(n);
   prime_sieve.nth(n).unwrap_or(2)
 }
 
@@ -63,7 +64,12 @@ mod tests {
   }
 
   #[test]
+  fn check_2nd_prime () {
+    assert_eq!(nth_prime(1), 3);
+  }
+
+  #[test]
   fn check_10001st_prime () {
-    assert_eq!(nth_prime(10001), 104_759);
+    assert_eq!(nth_prime(10000), 104_743);
   }
 }
