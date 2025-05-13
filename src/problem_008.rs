@@ -23,6 +23,8 @@ pub const BIG_NUM_STR: &str = concat!(
   "71636269561882670428252483600823257530420752963450"
 );
 
+// TODO See if there's room for improvement here. Can we keep a single running product?
+//   Maybe we could divide digits out of the product as they leave the window? 
 /// Iterate over every window of length N in nums and find the product
 /// Split around 0 digit to prevent 0 product
 #[must_use]
