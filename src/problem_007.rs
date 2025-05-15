@@ -30,7 +30,14 @@ impl Iterator for PrimeSieve {
   #[allow(clippy::maybe_infinite_iter)]
   fn next(&mut self) -> Option<Self::Item> {
     let next = self.primes.last()
-      .and_then(|&prev| (prev..).find(|n| self.primes.iter().all(|p| n % p != 0)))
+      .and_then(|&prev| ((prev + 1)..)
+        .find(|n| {
+          let nsqrt = n.isqrt();
+          self.primes.iter()
+            .take_while(|p| nsqrt.ge(p))
+            .all(|p| n % p != 0)
+        })
+      )
       .unwrap_or(2);
     self.primes.push(next);
     Some(next)
@@ -58,7 +65,6 @@ mod tests {
     let actual_primes: Vec<Int> = vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
 
     actual_primes.iter().zip(prime_sieve).for_each(|(&expected, actual)| {
-      println!("{} == {} ? {}", expected, actual, expected == actual);
       assert_eq!(expected, actual);
     });
   }
