@@ -23,7 +23,7 @@ impl Problem for Problem010 {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
   use super::*;
 
   #[test]
