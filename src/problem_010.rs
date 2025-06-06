@@ -1,6 +1,6 @@
 //! Find the sum of all primes below two million
 
-use crate::{utils::prime::PrimeSieve, Problem};
+use crate::{Problem, utils::prime::PrimeSieve};
 
 pub struct Problem010;
 
@@ -12,9 +12,7 @@ impl Problem for Problem010 {
     }
 
     fn solve() -> Self::Solution {
-        PrimeSieve::default()
-          .take_while(|&n| n < 2_000_000)
-          .sum()
+        PrimeSieve::default().take_while(|&n| n < 2_000_000).sum()
     }
 
     fn is_correct(solution: &Self::Solution) -> bool {
@@ -24,10 +22,10 @@ impl Problem for Problem010 {
 
 #[cfg(test)]
 mod tests {
-  use super::*;
+    use super::*;
 
-  #[test]
-  fn problem_010_solve() {
-    assert!(Problem010::test());
-  }
+    #[test]
+    fn problem_010_solve() {
+        assert!(Problem010::test());
+    }
 }

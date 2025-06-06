@@ -6,16 +6,16 @@ pub mod problem_008;
 pub mod problem_009;
 pub mod problem_010;
 pub mod problem_011;
-
+pub mod problem_012;
 
 pub trait Problem {
-  type Solution: Eq + std::fmt::Debug;
-  fn name() -> &'static str;
-  fn solve() -> Self::Solution;
-  fn is_correct(solution: &Self::Solution) -> bool;
+    type Solution: Eq + std::fmt::Debug;
+    fn name() -> &'static str;
+    fn solve() -> Self::Solution;
+    fn is_correct(solution: &Self::Solution) -> bool;
 
-  #[must_use]
-  fn test() -> bool {
-    Self::is_correct(&Self::solve())
-  }
+    #[must_use]
+    fn test() -> bool {
+        Self::is_correct(&Self::solve())
+    }
 }
