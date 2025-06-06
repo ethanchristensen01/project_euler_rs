@@ -1,6 +1,6 @@
 //! Find the sum of all primes below two million
 
-use crate::{problem_007::PrimeSieve, Problem};
+use crate::{utils::prime::PrimeSieve, Problem};
 
 pub struct Problem010;
 
