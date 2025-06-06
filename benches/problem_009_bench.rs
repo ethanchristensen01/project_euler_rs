@@ -3,10 +3,10 @@ use project_euler::problem_009::{find_pythagorean_triple_1000, get_possible_prod
 
 fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("009_find_pythagorean_triple", |b| {
-        b.iter(find_pythagorean_triple_1000)
+        b.iter(find_pythagorean_triple_1000);
     });
     c.bench_function("009_get_possible_factors", |b| {
-        b.iter(get_possible_products)
+        b.iter(get_possible_products);
     });
 }
 

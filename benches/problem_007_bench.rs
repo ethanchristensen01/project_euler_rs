@@ -6,7 +6,7 @@ fn criterion_benchmark(c: &mut Criterion) {
     let inputs: Vec<usize> = vec![10, 100, 1_000, 10_000];
     for input in inputs {
         c.bench_with_input(BenchmarkId::new("007_nth_prime", input), &input, |b, i| {
-            b.iter(|| nth_prime(black_box(*i)))
+            b.iter(|| nth_prime(black_box(*i)));
         });
     }
 }
