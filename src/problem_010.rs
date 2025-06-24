@@ -1,22 +1,22 @@
 //! Find the sum of all primes below two million
 
-use crate::{Problem, utils::prime::PrimeSieve};
+use crate::{ProblemDescriptor, ProblemSolution, utils::prime::PrimeSieve};
 
 pub struct Problem010;
+pub struct Solution010;
 
-impl Problem for Problem010 {
+impl ProblemDescriptor for Problem010 {
+    const PROBLEM_ID: usize = 10;
+    const PROBLEM_TITLE: &str = "Summation of Primes";
     type Solution = u64;
+    const SOLUTION: Self::Solution = 142_913_828_922;
+}
 
-    fn name() -> &'static str {
-        "010 Summation of Primes"
-    }
-
-    fn solve() -> Self::Solution {
-        PrimeSieve::default().take_while(|&n| n < 2_000_000).sum()
-    }
-
-    fn is_correct(solution: &Self::Solution) -> bool {
-        *solution == 142_913_828_922
+impl ProblemSolution for Solution010 {
+    type Problem = Problem010;
+    
+    fn solve() -> u64 {
+        PrimeSieve::default().iter().take_while(|&n| n < 2_000_000).sum()
     }
 }
 
@@ -26,6 +26,6 @@ mod tests {
 
     #[test]
     fn problem_010_solve() {
-        assert!(Problem010::test());
+        assert!(Solution010::test());
     }
 }

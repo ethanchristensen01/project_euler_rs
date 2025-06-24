@@ -5,9 +5,10 @@ edition = "2024"
 
 [dependencies]
 criterion = { version = "0.4", features = ["html_reports"] }
+Inflector = { version = "0.11.4", default-features = false }
 
 [[bench]]
-name = "problem_006_bench"
+name = "problem_004_bench"
 harness = false
 
 [[bench]]
@@ -30,6 +31,11 @@ harness = false
 name = "problem_011_bench"
 harness = false
 
+[[bench]]
+name = "problem_012_bench"
+harness = false
+
 [lints]
-clippy.pedantic = "warn"
-clippy.nursery = "warn"
+clippy.pedantic = { level = "warn", priority = -1 }
+clippy.nursery = { level = "warn", priority = -1 }
+clippy.redundant_else = "allow"

@@ -1,6 +1,27 @@
 //! Find the maximum product of N adjacent digits in a large number
 
-pub const BIG_NUM_STR: &str = concat!(
+use crate::{ProblemDescriptor, ProblemSolution};
+
+pub struct Problem008;
+pub struct Solution008;
+
+impl ProblemDescriptor for Problem008 {
+    const PROBLEM_ID: usize = 8;
+    const PROBLEM_TITLE: &str = "Largest Product in a Series";
+    type Solution = u64;
+    const SOLUTION: Self::Solution = 23_514_624_000;
+}
+
+impl ProblemSolution for Solution008 {
+    type Problem = Problem008;
+
+    fn solve() -> <Self::Problem as ProblemDescriptor>::Solution {
+        let nums = numstring_to_numslice(BIG_NUM_STR).expect("BIG_NUM_STR should be convertable into Vec of nums");
+        max_product_subslice(&nums, 13)
+    }
+}
+
+const BIG_NUM_STR: &str = concat!(
     "73167176531330624919225119674426574742355349194934",
     "96983520312774506326239578318016984801869478851843",
     "85861560789112949495459501737958331952853208805511",
@@ -28,7 +49,7 @@ pub const BIG_NUM_STR: &str = concat!(
 /// Iterate over every window of length N in nums and find the product
 /// Split around 0 digit to prevent 0 product
 #[must_use]
-pub fn max_product_subslice(nums: &[u32], window_size: usize) -> u64 {
+fn max_product_subslice(nums: &[u32], window_size: usize) -> u64 {
     nums.split(|&n| n == 0)
         .flat_map(|s| s.windows(window_size))
         .map(|w| w.iter().map(|&n| <u64>::from(n)).product())
@@ -38,14 +59,14 @@ pub fn max_product_subslice(nums: &[u32], window_size: usize) -> u64 {
 
 #[non_exhaustive]
 #[derive(Debug, PartialEq, Eq)]
-pub enum NumParseError {
+enum NumParseError {
     InvalidCharacterFound,
 }
 
 /// # Errors
 ///
 /// Returns an error if one of the characters in the string is not a valid digit.
-pub fn numstring_to_numslice(numstr: &str) -> Result<Vec<u32>, NumParseError> {
+fn numstring_to_numslice(numstr: &str) -> Result<Vec<u32>, NumParseError> {
     numstr
         .chars()
         .map(|c| c.to_digit(10))
@@ -83,10 +104,7 @@ mod tests {
     }
 
     #[test]
-    fn test_thirteen_window() {
-        let s = BIG_NUM_STR;
-        let nums = numstring_to_numslice(s).unwrap();
-        let result = max_product_subslice(&nums, 13);
-        assert_eq!(result, 23_514_624_000);
+    fn problem_008_solve() {
+        assert!(Solution008::test());
     }
 }

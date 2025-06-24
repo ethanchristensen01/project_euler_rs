@@ -1,20 +1,11 @@
-use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
-use project_euler::problem_008::{BIG_NUM_STR, max_product_subslice, numstring_to_numslice};
-use std::hint::black_box;
+use criterion::{Criterion, criterion_group, criterion_main};
+use project_euler::problem_008::{Solution008, Problem008};
+use project_euler::{ProblemDescriptor, ProblemSolution};
 
 fn criterion_benchmark(c: &mut Criterion) {
-    let inputs = [4, 8, 12, 13, 16];
-    c.bench_function("008_numstring_to_numslice", |b| {
-        b.iter(|| numstring_to_numslice(black_box(BIG_NUM_STR)));
+    c.bench_function(Problem008::get_descriptor_str().as_str(), |b| {
+        b.iter(Solution008::solve);
     });
-    let nums = numstring_to_numslice(BIG_NUM_STR).expect("num str input should be valid");
-    for input in inputs {
-        c.bench_with_input(
-            BenchmarkId::new("008_max_product_sublice", input),
-            &input,
-            |b, i| b.iter(|| max_product_subslice(black_box(&nums), black_box(*i))),
-        );
-    }
 }
 
 criterion_group!(benches, criterion_benchmark);

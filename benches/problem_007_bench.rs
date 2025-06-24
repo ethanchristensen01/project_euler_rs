@@ -1,14 +1,11 @@
-use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
-use project_euler::problem_007::nth_prime;
-use std::hint::black_box;
+use criterion::{Criterion, criterion_group, criterion_main};
+use project_euler::problem_007::{Solution007, Problem007};
+use project_euler::{ProblemDescriptor, ProblemSolution};
 
 fn criterion_benchmark(c: &mut Criterion) {
-    let inputs: Vec<usize> = vec![10, 100, 1_000, 10_000];
-    for input in inputs {
-        c.bench_with_input(BenchmarkId::new("007_nth_prime", input), &input, |b, i| {
-            b.iter(|| nth_prime(black_box(*i)));
-        });
-    }
+    c.bench_function(Problem007::get_descriptor_str().as_str(), |b| {
+        b.iter(Solution007::solve);
+    });
 }
 
 criterion_group!(benches, criterion_benchmark);

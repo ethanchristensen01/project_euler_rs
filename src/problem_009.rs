@@ -1,5 +1,24 @@
 //! Find the only pythagorean triple which sums to 1000, and return the product of each number
 
+use crate::{ProblemDescriptor, ProblemSolution};
+
+pub struct Problem009;
+pub struct Solution009;
+
+impl ProblemDescriptor for Problem009 {
+    const PROBLEM_ID: usize = 9;
+    const PROBLEM_TITLE: &str = "Special Pythagorean Triplet";
+    type Solution = u64;
+    const SOLUTION: Self::Solution = 31_875_000;
+}
+impl ProblemSolution for Solution009 {
+    type Problem = Problem009;
+
+    fn solve() -> <Self::Problem as ProblemDescriptor>::Solution {
+        find_pythagorean_triple_1000().expect("problem 9 solution should not be none")
+    }
+}
+
 // TODO: Could generalize this problem a little more, maybe?
 //   Would require const prime_factorization, which exists here https://crates.io/crates/const-primes
 
@@ -24,7 +43,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_find_pythagorean_triple_1000() {
-        assert_eq!(find_pythagorean_triple_1000(), Some(31_875_000));
+    fn problem_009_solve() {
+        assert!(Solution009::test());
     }
 }

@@ -1,7 +1,30 @@
 //! Largest Product in a Grid
 
-use crate::Problem;
+use crate::{ProblemDescriptor, ProblemSolution};
 use std::{array, fmt::Debug};
+
+pub struct Problem011;
+pub struct Solution011;
+
+impl ProblemDescriptor for Problem011 {
+    const PROBLEM_ID: usize = 11;
+    const PROBLEM_TITLE: &str = "Largest Product in a Grid";
+    type Solution = u32;
+    const SOLUTION: Self::Solution = 70_600_674;
+}
+
+impl ProblemSolution for Solution011 {
+    type Problem = Problem011;
+
+    fn solve() -> <Self::Problem as ProblemDescriptor>::Solution {
+        Grid::new(BIG_NUM_GRID)
+            .adjacency_iter::<4>()
+            .map(|a| a.iter().copied().product())
+            .max()
+            .expect("adjacency iter should not be empty")
+    }
+}
+
 
 const BIG_NUM_GRID: [[u32; 20]; 20] = [
     [
@@ -65,7 +88,7 @@ const BIG_NUM_GRID: [[u32; 20]; 20] = [
         1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48,
     ],
 ];
-pub struct Grid<const W: usize, const H: usize, T> {
+struct Grid<const W: usize, const H: usize, T> {
     items: [[T; W]; H],
 }
 
@@ -142,7 +165,7 @@ impl Direction {
 }
 
 #[derive(Debug)]
-pub struct AdjacencyIterator<'a, const N: usize, const W: usize, const H: usize, T> {
+struct AdjacencyIterator<'a, const N: usize, const W: usize, const H: usize, T> {
     row: usize,
     col: usize,
     direction: Direction,
@@ -244,28 +267,6 @@ impl<'a, const N: usize, const W: usize, const H: usize, T: Debug> Iterator
     }
 }
 
-pub struct Problem011;
-
-impl Problem for Problem011 {
-    type Solution = u32;
-
-    fn name() -> &'static str {
-        "011 Largest Product in a Grid"
-    }
-
-    fn solve() -> Self::Solution {
-        Grid::new(BIG_NUM_GRID)
-            .adjacency_iter::<4>()
-            .map(|a| a.iter().copied().product())
-            .max()
-            .expect("adj iter should not be empty")
-    }
-
-    fn is_correct(solution: &Self::Solution) -> bool {
-        *solution == 70_600_674
-    }
-}
-
 #[cfg(test)]
 mod tests {
     const DEBUG_GRID_5_5: [[i32; 5]; 5] = [
@@ -350,6 +351,6 @@ mod tests {
 
     #[test]
     fn problem_011_solve() {
-        assert!(Problem011::test());
+        assert!(Solution011::test());
     }
 }

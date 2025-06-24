@@ -1,11 +1,30 @@
 //! Find the 10001st prime number
-use crate::utils::prime::{Int, PrimeSieve};
+use crate::{utils::prime::PrimeSieve, ProblemDescriptor, ProblemSolution};
 
-/// ZERO INDEXED
+pub struct Problem007;
+
+impl ProblemDescriptor for Problem007 {
+    const PROBLEM_ID: usize = 7;
+    const PROBLEM_TITLE: &str = "10001st prime";
+    type Solution = u64;
+    const SOLUTION: Self::Solution = 104_743;
+}
+
+pub struct Solution007;
+
+impl ProblemSolution for Solution007 {
+    type Problem = Problem007;
+
+    fn solve() -> <Self::Problem as ProblemDescriptor>::Solution {
+        nth_prime(10001)
+    }
+}
+
+/// ONE INDEXED
 #[must_use]
-pub fn nth_prime(n: usize) -> Int {
-    let mut prime_sieve = PrimeSieve::with_capacity(n);
-    prime_sieve.nth(n).unwrap_or(2)
+fn nth_prime(n: usize) -> u64 {
+    let primes = PrimeSieve::first_n_primes(n).to_vec();
+    *primes.last().expect("Should have generated some primes")
 }
 
 #[cfg(test)]
@@ -13,25 +32,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn check_10_primes() {
-        let prime_sieve = PrimeSieve::default();
-        let actual_primes: Vec<Int> = vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
-
-        actual_primes
-            .iter()
-            .zip(prime_sieve)
-            .for_each(|(&expected, actual)| {
-                assert_eq!(expected, actual);
-            });
-    }
-
-    #[test]
     fn check_2nd_prime() {
-        assert_eq!(nth_prime(1), 3);
+        assert_eq!(nth_prime(2), 3);
     }
 
     #[test]
-    fn check_10001st_prime() {
-        assert_eq!(nth_prime(10000), 104_743);
+    fn problem_007_solve() {
+        assert!(Solution007::test());
     }
 }
