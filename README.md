@@ -1,6 +1,6 @@
 # Project Euler Solutions
 
-Problem definitions, solutions, tests, and benchmarks for project euler. Written in Rust.
+Problem definitions, solutions, tests, and benchmarks for [Project Euler](https://projecteuler.net/). Written in Rust.
 
 ## Usage
 
