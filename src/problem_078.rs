@@ -11,7 +11,7 @@ pub struct Problem078;
 pub struct Solution078;
 
 // p(n) = P(n, n)
-// P(n, g) = P(n - g, Min(g, n - g))
+// P(n, g) = P(n, g - 1) + P(n - g, Min(g, n - g))
 // P(0, g) = 1
 // P(g, 0) = 0
 pub struct DynamicPartitions {
